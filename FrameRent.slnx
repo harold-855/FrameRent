@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/FrameRent.Api/FrameRent.Api.csproj" />
+  <Project Path="src/FrameRent.Application/FrameRent.Application.csproj" />
+  <Project Path="src/FrameRent.Domain/FrameRent.Domain.csproj" />
+  <Project Path="src/FrameRent.Infrastructure/FrameRent.Infrastructure.csproj" />
+</Solution>
