@@ -11,4 +11,6 @@ public interface IEquipmentRepository
     Task<IReadOnlyCollection<Equipment>> GetAllAsync();
 
     Task<bool> ExistsAsync(Guid id);
+    
+    Task UpdateAsync(Equipment equipment);
 }
