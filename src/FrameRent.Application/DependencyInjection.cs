@@ -1,12 +1,12 @@
-﻿using FrameRent.Application.UseCases.EquipmentManagement.CreateEquipment
-using FrameRent.Application.UseCases.GetEquipmentById;
+﻿using FrameRent.Application.UseCases.EquipmentManagement.CreateEquipment;
+using FrameRent.Application.UseCases.EquipmentManagement.GetEquipmentById;
 using FrameRent.Application.UseCases.EquipmentManagement.GetAllEquipment;
 using FrameRent.Application.UseCases.EquipmentManagement.UpdateEquipment;
 using FrameRent.Application.UseCases.EquipmentManagement.ActivateEquipment;
 using FrameRent.Application.UseCases.EquipmentManagement.DeactivateEquipment;
 using Microsoft.Extensions.DependencyInjection;
 
-using Microsoft.Extensions.DependencyInjection;
+
 
 namespace FrameRent.Application
 {

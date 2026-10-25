@@ -1,5 +1,4 @@
-﻿
-using FrameRent.Domain.Entities;
+﻿using FrameRent.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrameRent.Infrastructure.Persistence;
@@ -17,4 +16,10 @@ public class FrameRentDbContext: DbContext
     public DbSet<Rental> Rentals => Set<Rental>();
     public DbSet<RentalDetail> RentalDetails => Set<RentalDetail>();
     public DbSet<Penalty> Penalties => Set<Penalty>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(FrameRentDbContext).Assembly);
+    }
 }

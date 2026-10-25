@@ -1,20 +1,29 @@
-﻿using FrameRent.Application.Interfaces.Repositories;
-using FrameRent.Domain.Entities;
+using FrameRent.Application.DTOs.Equipment;
+using FrameRent.Application.Interfaces.Repositories;
 
-namespace FrameRent.Application.UseCases.GetEquipmentById;
+namespace FrameRent.Application.UseCases.EquipmentManagement.GetEquipmentById;
 
 public class GetEquipmentByIdUseCase
 {
     private readonly IEquipmentRepository _equipmentRepository;
 
-    public GetEquipmentByIdUseCase(
-        IEquipmentRepository equipmentRepository)
+    public GetEquipmentByIdUseCase(IEquipmentRepository equipmentRepository)
     {
         _equipmentRepository = equipmentRepository;
     }
 
-    public async Task<Equipment?> ExecuteAsync(Guid id)
+    public async Task<EquipmentResponse?> ExecuteAsync(Guid id)
     {
-        return await _equipmentRepository.GetByIdAsync(id);
+        var equipment = await _equipmentRepository.GetByIdAsync(id);
+        if (equipment is null) return null;
+
+        return new EquipmentResponse(
+            equipment.Id,
+            equipment.Name,
+            equipment.Category,
+            equipment.Description,
+            equipment.DailyRate,
+            equipment.TotalUnits,
+            equipment.IsActive);
     }
 }

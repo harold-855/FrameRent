@@ -16,24 +16,42 @@ public class Customer : BaseEntity
         string email,
         string phoneNumber)
     {
+        ValidateAndSet(firstName, lastName, email, phoneNumber);
+    }
+
+    public Customer(
+        Guid id,
+        string firstName,
+        string lastName,
+        string email,
+        string phoneNumber)
+    {
+        Id = id;
+        ValidateAndSet(firstName, lastName, email, phoneNumber);
+    }
+
+    private Customer()
+    {
+    }
+
+    private void ValidateAndSet(
+        string firstName,
+        string lastName,
+        string email,
+        string phoneNumber)
+    {
         if (string.IsNullOrWhiteSpace(firstName))
-            throw new ArgumentException(
-                "The first name is required.",
-                nameof(firstName));
+            throw new ArgumentException("El nombre es obligatorio.", nameof(firstName));
 
         if (string.IsNullOrWhiteSpace(lastName))
-            throw new ArgumentException(
-                "The last name is required.",
-                nameof(lastName));
+            throw new ArgumentException("El apellido es obligatorio.", nameof(lastName));
 
         if (string.IsNullOrWhiteSpace(email))
-            throw new ArgumentException(
-                "The email is required.",
-                nameof(email));
+            throw new ArgumentException("El correo electrónico es obligatorio.", nameof(email));
 
         FirstName = firstName.Trim();
         LastName = lastName.Trim();
-        Email = email.Trim();
+        Email = email.Trim().ToLowerInvariant();
         PhoneNumber = phoneNumber?.Trim() ?? string.Empty;
     }
 
@@ -43,24 +61,6 @@ public class Customer : BaseEntity
         string email,
         string phoneNumber)
     {
-        if (string.IsNullOrWhiteSpace(firstName))
-            throw new ArgumentException(
-                "The first name is required.",
-                nameof(firstName));
-
-        if (string.IsNullOrWhiteSpace(lastName))
-            throw new ArgumentException(
-                "The last name is required.",
-                nameof(lastName));
-
-        if (string.IsNullOrWhiteSpace(email))
-            throw new ArgumentException(
-                "The email is required.",
-                nameof(email));
-
-        FirstName = firstName.Trim();
-        LastName = lastName.Trim();
-        Email = email.Trim();
-        PhoneNumber = phoneNumber?.Trim() ?? string.Empty;
+        ValidateAndSet(firstName, lastName, email, phoneNumber);
     }
 }

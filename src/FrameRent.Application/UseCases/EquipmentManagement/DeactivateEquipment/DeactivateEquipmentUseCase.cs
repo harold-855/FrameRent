@@ -1,4 +1,4 @@
-﻿using FrameRent.Application.Interfaces.Repositories;
+using FrameRent.Application.Interfaces.Repositories;
 
 namespace FrameRent.Application.UseCases.EquipmentManagement.DeactivateEquipment;
 
@@ -6,8 +6,7 @@ public class DeactivateEquipmentUseCase
 {
     private readonly IEquipmentRepository _equipmentRepository;
 
-    public DeactivateEquipmentUseCase(
-        IEquipmentRepository equipmentRepository)
+    public DeactivateEquipmentUseCase(IEquipmentRepository equipmentRepository)
     {
         _equipmentRepository = equipmentRepository;
     }
@@ -17,7 +16,11 @@ public class DeactivateEquipmentUseCase
         var equipment = await _equipmentRepository.GetByIdAsync(id);
 
         if (equipment is null)
-            throw new KeyNotFoundException("Equipment not found.");
+            throw new KeyNotFoundException("Equipo no encontrado.");
+
+        var hasActiveRentals = await _equipmentRepository.HasActiveOrDeliveredRentalsAsync(id);
+        if (hasActiveRentals)
+            throw new InvalidOperationException("Un equipo con alquileres aprobados o entregados no puede desactivarse.");
 
         equipment.Deactivate();
 

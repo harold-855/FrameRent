@@ -21,25 +21,41 @@ public class Equipment : BaseEntity
         decimal dailyRate,
         int totalUnits)
     {
+        ValidateAndSet(name, category, description, dailyRate, totalUnits);
+    }
+
+    private Equipment()
+    {
+    }
+
+    public void Update(
+        string name,
+        string category,
+        string description,
+        decimal dailyRate,
+        int totalUnits)
+    {
+        ValidateAndSet(name, category, description, dailyRate, totalUnits);
+    }
+
+    private void ValidateAndSet(
+        string name,
+        string category,
+        string description,
+        decimal dailyRate,
+        int totalUnits)
+    {
         if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException(
-                "The equipment name is required.",
-                nameof(name));
+            throw new ArgumentException("El nombre del equipo es obligatorio.", nameof(name));
 
         if (string.IsNullOrWhiteSpace(category))
-            throw new ArgumentException(
-                "The equipment category is required.",
-                nameof(category));
+            throw new ArgumentException("La categoría del equipo es obligatoria.", nameof(category));
 
         if (dailyRate < 0)
-            throw new ArgumentOutOfRangeException(
-                nameof(dailyRate),
-                "The daily rate cannot be negative.");
+            throw new ArgumentOutOfRangeException(nameof(dailyRate), "La tarifa diaria no puede ser negativa.");
 
         if (totalUnits <= 0)
-            throw new ArgumentOutOfRangeException(
-                nameof(totalUnits),
-                "The total units must be greater than zero.");
+            throw new ArgumentOutOfRangeException(nameof(totalUnits), "El total de unidades debe ser mayor a cero.");
 
         Name = name.Trim();
         Category = category.Trim();
@@ -51,9 +67,7 @@ public class Equipment : BaseEntity
     public void UpdateDailyRate(decimal newDailyRate)
     {
         if (newDailyRate < 0)
-            throw new ArgumentOutOfRangeException(
-                nameof(newDailyRate),
-                "The daily rate cannot be negative.");
+            throw new ArgumentOutOfRangeException(nameof(newDailyRate), "La tarifa diaria no puede ser negativa.");
 
         DailyRate = newDailyRate;
     }
@@ -61,9 +75,7 @@ public class Equipment : BaseEntity
     public void UpdateTotalUnits(int newTotalUnits)
     {
         if (newTotalUnits <= 0)
-            throw new ArgumentOutOfRangeException(
-                nameof(newTotalUnits),
-                "The total units must be greater than zero.");
+            throw new ArgumentOutOfRangeException(nameof(newTotalUnits), "El total de unidades debe ser mayor a cero.");
 
         TotalUnits = newTotalUnits;
     }

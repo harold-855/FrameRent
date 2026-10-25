@@ -8,13 +8,12 @@ public class CreateEquipmentUseCase
 {
     private readonly IEquipmentRepository _equipmentRepository;
 
-    public CreateEquipmentUseCase(
-        IEquipmentRepository equipmentRepository)
+    public CreateEquipmentUseCase(IEquipmentRepository equipmentRepository)
     {
         _equipmentRepository = equipmentRepository;
     }
 
-    public async Task ExecuteAsync(CreateEquipmentRequest request)
+    public async Task<Guid> ExecuteAsync(CreateEquipmentRequest request)
     {
         var equipment = new Equipment(
             request.Name,
@@ -24,5 +23,7 @@ public class CreateEquipmentUseCase
             request.TotalUnits);
 
         await _equipmentRepository.AddAsync(equipment);
+
+        return equipment.Id;
     }
 }

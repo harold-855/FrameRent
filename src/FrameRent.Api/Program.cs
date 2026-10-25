@@ -1,15 +1,16 @@
-using FrameRent.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
+using FrameRent.Application;
+using FrameRent.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Registrar servicios de la API.
 builder.Services.AddControllers();
 
-// Configurar la conexión con PostgreSQL.
-builder.Services.AddDbContext<FrameRentDbContext>(options =>
-    options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+// Registrar los casos de uso de Application.
+builder.Services.AddApplication();
+
+// Registrar Infrastructure, PostgreSQL y los repositorios.
+builder.Services.AddInfrastructure(builder.Configuration);
 
 // Mantener la documentación OpenAPI de la plantilla.
 builder.Services.AddOpenApi();
