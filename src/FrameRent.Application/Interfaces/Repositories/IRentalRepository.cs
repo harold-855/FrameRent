@@ -10,6 +10,8 @@ public interface IRentalRepository
     Task<Rental?> GetByIdAsync(Guid id);
     Task<IReadOnlyCollection<Rental>> GetByCustomerIdAsync(Guid customerId);
     Task<IReadOnlyCollection<Rental>> GetAllAsync(RentalStatus? status = null);
+    Task<IReadOnlyCollection<RentalDetail>> GetDetailsByRentalIdAsync(Guid rentalId);
+    Task<IReadOnlyCollection<Penalty>> GetPenaltiesByRentalIdAsync(Guid rentalId);
     Task<int> CountActiveOrPendingByCustomerIdAsync(Guid customerId);
     Task UpdateAsync(Rental rental);
     Task<IReadOnlyCollection<TopEquipmentDto>> GetTopRentedEquipmentAsync(int limit = 10);

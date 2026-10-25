@@ -1,9 +1,12 @@
 ﻿using FrameRent.Domain.Entities;
+using FrameRent.Infrastructure.Persistence.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrameRent.Infrastructure.Persistence;
 
-public class FrameRentDbContext: DbContext
+public class FrameRentDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
     public FrameRentDbContext(
         DbContextOptions<FrameRentDbContext> options)
